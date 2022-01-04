@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.js": "/To-Do-List-Advanced/static/js/main.a431537c.js",
+    "static/js/787.4e1e4bbf.chunk.js": "/To-Do-List-Advanced/static/js/787.4e1e4bbf.chunk.js",
+    "index.html": "/To-Do-List-Advanced/index.html",
+    "main.a431537c.js.map": "/To-Do-List-Advanced/static/js/main.a431537c.js.map",
+    "787.4e1e4bbf.chunk.js.map": "/To-Do-List-Advanced/static/js/787.4e1e4bbf.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.a431537c.js"
+  ]
+}
