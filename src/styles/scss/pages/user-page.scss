@@ -1,0 +1,38 @@
+.user-page{
+    .user-details-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        img{
+            margin-top: 2rem;
+            border:1px solid black;
+            border-radius: 25px;
+            width: 100px;
+            height: 100px;
+        }
+        .user-name{
+            font-size: 2rem;
+            margin: 1rem 0 0.5rem;
+        }
+        .user-id{
+            margin-bottom: 2rem;
+        }
+    }
+    .to-do-section{
+        form{
+            margin: 1rem auto;
+            width: 30%;
+        }
+        
+    }
+    .to-do-list{
+        article{
+            width: 90%;
+            margin:0 auto 1rem;
+            padding: 1rem;
+            border-bottom:1px black solid;
+
+        }
+    }
+}

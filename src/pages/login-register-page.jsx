@@ -1,12 +1,12 @@
 export const LoginRegisterPage = () => {
     return (
-        <section>
-            <section>
+        <section className="login-register-page">
+            <section className="forms-container">
                 <form action="">
                     <h1>Log in</h1>
                     <input placeholder="Email"/>
                     <input placeholder="Password"/>
-                    <button>Log in</button>
+                    <button className="submit-button">Log in</button>
                 </form>
                 <form action="">
                     <h1>Register</h1>
@@ -14,14 +14,14 @@ export const LoginRegisterPage = () => {
                     <input placeholder="Last name"/>
                     <input placeholder="Email"/>
                     <input placeholder="Password"/>
-                    <button>Register</button>
+                    <button className="submit-button">Register</button>
                 </form>
                 <form action="">
                     <h1>Log in as an Admin</h1>
                     <input placeholder="Email"/>
                     <input placeholder="Password"/>
                     <input placeholder="Admin Key"/>
-                    <button>Log in as an Admin</button>
+                    <button className="submit-button">Log in as an Admin</button>
                 </form>
             </section>
         </section>)
