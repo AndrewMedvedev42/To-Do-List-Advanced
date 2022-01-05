@@ -1,0 +1,12 @@
+.admin-console-page {
+  display: flex; }
+  .admin-console-page .user-details {
+    margin-top: 1rem;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+  .admin-console-page .user-todo-list {
+    width: 80%; }
+    .admin-console-page .user-todo-list article {
+      border-bottom: 1px solid black; }

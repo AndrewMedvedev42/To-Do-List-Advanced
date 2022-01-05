@@ -1,0 +1,15 @@
+.admin-page section {
+  width: 80%;
+  margin: 1rem auto 2rem; }
+  .admin-page section a {
+    text-decoration: none; }
+    .admin-page section a article {
+      border-bottom: 1px black solid;
+      display: flex;
+      justify-content: space-around;
+      align-items: center; }
+      .admin-page section a article img {
+        border: black 1px solid;
+        border-radius: 20px;
+        width: 100px;
+        height: 100px; }

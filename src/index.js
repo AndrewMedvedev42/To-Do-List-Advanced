@@ -12,6 +12,9 @@ import "./styles/css/index.css"
 import "./styles/css/navigation-menu.css"
 import "./styles/css/pages/login-register-page.css"
 import "./styles/css/pages/user-page.css"
+import "./styles/css/pages/admin-page.css"
+import "./styles/css/pages/admin-console-page.css"
+
 const composeEnchancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const store = createStore(accountReducer , composeEnchancer(applyMiddleware(thunk)))

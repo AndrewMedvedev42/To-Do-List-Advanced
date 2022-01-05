@@ -9,6 +9,7 @@ import { UserPage } from "./pages/user-page";
 import { EditUserDetails } from "./pages/edit-user-details";
 import { EditToDoPage } from "./pages/edit-to-do";
 import { AdminPage } from "./pages/admin-page";
+import { AdminUserConsole } from "./pages/admin-console";
 
 function App() {
   return (
@@ -19,8 +20,9 @@ function App() {
           <Route path="/" element={<LoginRegisterPage/>}></Route>
           <Route path="/users/:id" element={<UserPage/>}></Route>
           <Route path="/users/:id/user-details" element={<EditUserDetails/>}></Route>
-          <Route path="/users/:id/edit-note/:id" element={<EditToDoPage/>}></Route>
+          <Route path="/users/:id/edit-note/:note_id" element={<EditToDoPage/>}></Route>
           <Route path="/admin" element={<AdminPage/>}></Route>
+          <Route path="/admin/console/user/:id" element={<AdminUserConsole/>}></Route>
         </Routes>
       </Router>
     </div>

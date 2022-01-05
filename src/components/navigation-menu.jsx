@@ -10,6 +10,6 @@ export const NavigationMenu = () => {
             <Link to="/users/42/user-details">Edit User Details</Link>
             <Link to="/users/42/edit-note/365">User Edit Note</Link>
             <Link to="/admin">Admin Page</Link>
-            {/* <Link to="/admin/console/42">Admin Console</Link> */}
+            <Link to="/admin/console/user/42">Admin Console</Link>
         </nav>)
 }

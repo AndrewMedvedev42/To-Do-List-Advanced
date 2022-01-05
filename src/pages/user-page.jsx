@@ -6,7 +6,7 @@ export const UserPage = () => {
                 <img src="#" alt="user-img" />
                 <h1 className="user-name">User name</h1>
                 <span className="user-id">User id</span>
-                <Link to="/user/:id/user-details">
+                <Link to="/users/42/user-details">
                     <button className="submit-button">Edit Deatils</button>
                 </Link>
             </section>
