@@ -1,0 +1,26 @@
+[
+    {
+        "firstName":"Andrew",
+        "lastName":"Medvedev",
+        "email":"email@gmail.com",
+        "password":"haha341209xc",
+        "activeAccount":true,
+        "isNewUser":true,
+        "toDoList":[
+            {
+                "title":"finish the project",
+                "completed":false,
+                "completionData":""
+            }
+        ]
+    },
+    {
+        "firstName":"Robert",
+        "lastName":"Rockson",
+        "email":"email@gmail.com",
+        "password":"poper56!nbv",
+        "activeAccount":true,
+        "isNewUser":true,
+        "toDoList":[]
+    }
+]
