@@ -2,7 +2,7 @@ export const EditToDoPage = () => {
     return (
         <section>
             <section>
-                <form action="">
+                <form className="white-container" action="">
                     <input type="text" />
                     <textarea name="" id="" cols="30" rows="10"></textarea>
                     <label htmlFor="">Done:</label>

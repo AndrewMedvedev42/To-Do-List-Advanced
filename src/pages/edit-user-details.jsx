@@ -1,7 +1,7 @@
 export const EditUserDetails = () => {
     return (
         <section>
-            <section>
+            <section className="white-container">
                 <img src="#" alt="user-img" />
                 <form action="">
                     <input defaultValue="User name" />

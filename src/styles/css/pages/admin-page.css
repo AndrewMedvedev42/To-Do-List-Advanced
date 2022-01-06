@@ -4,7 +4,6 @@
   .admin-page section a {
     text-decoration: none; }
     .admin-page section a article {
-      border-bottom: 1px black solid;
       display: flex;
       justify-content: space-around;
       align-items: center; }

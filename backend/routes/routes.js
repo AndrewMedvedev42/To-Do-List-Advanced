@@ -12,7 +12,7 @@ router.route('/login_register').post(createUser)
 
 // router.route('/users/:id/edit-note/:note-id')
 
-// router.route('/admin')
+router.route('/admin').get(getAllUsers)
 
 // router.route('/admin/console/user/:id')
 

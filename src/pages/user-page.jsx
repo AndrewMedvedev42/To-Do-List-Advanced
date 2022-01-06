@@ -12,14 +12,14 @@ export const UserPage = () => {
             </section>
 
             <section className="to-do-section">
-                <form action="">
+                <form className="white-container" action="">
                     <h2>Create to do</h2>
                     <input placeholder="title" />
                     <textarea placeholder="text"></textarea>
                 </form>
 
                 <section className="to-do-list">
-                    <article>
+                    <article className="white-container">
                         <h2>To-Do title</h2>
                         <p>To-Do text</p>
                         <button className="submit-button">Detele</button>

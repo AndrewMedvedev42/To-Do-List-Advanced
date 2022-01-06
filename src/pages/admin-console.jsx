@@ -1,7 +1,7 @@
 export const AdminUserConsole = () => {
     return (
         <section className="admin-console-page">
-            <article className="user-details">
+            <article className="white-container user-details">
                 <img src="#" alt="user-img" />
                 <h1>User name</h1>
                 <span>User id</span>
@@ -13,7 +13,7 @@ export const AdminUserConsole = () => {
                 <button>Delete</button>
             </article>    
             <section className="user-todo-list">
-                <article>
+                <article className="white-container">
                     <h2>To-Do title</h2>
                     <p>To-Do text</p>
                 </article>            
