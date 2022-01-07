@@ -2,19 +2,15 @@
     section{
         width: 80%;
         margin: 1rem auto 2rem;
-        a{
             text-decoration: none;
             article{
                 display: flex;
                 justify-content: space-around;
                 align-items: center;
                 img{
-                    border: rgb(0, 0, 0) 1px solid;
-                    border-radius: 20px;
                     width: 100px;
                     height: 100px;
                 }
             }
-        }
     }
 }

@@ -3,7 +3,10 @@
     display: flex;
     justify-content: space-around;
     background-color: blueviolet;
+    align-items: center;
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.15);
     .web-app-title{
         font-size: 1.5rem;
+        font-weight: 900;
     }
 }
