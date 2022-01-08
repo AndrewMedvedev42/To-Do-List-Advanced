@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Task = require("../models/to-do.model")
 
 const UserSchema = new mongoose.Schema({
     firstName:{
@@ -33,22 +34,7 @@ const UserSchema = new mongoose.Schema({
         type:Boolean,
         default:true
    },
-    toDoList:[
-        {
-            title:{
-                type:String,
-                required:[true, 'must providename'],
-                trim:true
-            },
-             completed:{
-                 type:Boolean,
-                 default:false
-             },
-             completionData:{
-                type:String
-            }
-        }
-    ]
+    toDoList:[Task.schema]
 })
 
 module.exports = mongoose.model('ToDo', UserSchema)

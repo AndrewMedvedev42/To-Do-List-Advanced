@@ -1,4 +1,6 @@
 require("dotenv").config()
+const mongoose = require('mongoose');
+
 const port = process.env.PUBLIC_URL || 5000
 const express = require('express')
 const app = express()
@@ -16,7 +18,6 @@ app.use(function(req, res, next) {
 
 
 app.use('/api/v1/', router)
-
 
 const start = async () => {
     try {

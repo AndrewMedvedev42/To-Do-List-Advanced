@@ -5,17 +5,18 @@ import {
   } from "react-router-dom";
 
 export const AdminPage = () => {
+        const [counter, setCounter] = useState(0)
         const [userList, setUserList] = useState([])
 
         useEffect(()=>{
             axios.get('http://localhost:5000/api/v1/admin')
             .then(res => setUserList(res.data.users)).catch(err=>console.log(err));
-        },[])
+        },[counter])
 
         const deleteUserAccount = (user_id) => {
              axios.delete(`http://localhost:5000/api/v1/admin/${user_id}`)
                 .then((res) => {
-                    console.log(res.status)
+                    setCounter(counter+1)
                 })
         }
 

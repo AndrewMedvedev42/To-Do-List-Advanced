@@ -102,7 +102,7 @@ const RegisterSection = () => {
             <h1>Register</h1>
             <input placeholder="First name" onChange={(e)=>{setUserFirstName(e.target.value)}} required/>
             <input placeholder="Last name" onChange={(e)=>{setUserLastName(e.target.value)}} required/>
-            <input placeholder="Email" onChange={(e)=>{setUserEmail(e.target.value)}} required/>
+            <input placeholder="Email" type="emailitem_id" onChange={(e)=>{setUserEmail(e.target.value)}} required/>
             <input placeholder="Password" onChange={(e)=>{setUserPassword(e.target.value)}} required/>
             <button className="submit-button" onClick={getUserData}>Register</button>
         </div>
