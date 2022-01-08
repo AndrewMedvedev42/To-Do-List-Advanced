@@ -1,12 +1,15 @@
 .navigation-menu{
+    color: white;
     padding: 1rem;
     display: flex;
     justify-content: space-around;
-    background-color: blueviolet;
+    background: linear-gradient(145deg, #c070dc, #a15fb9);
     align-items: center;
     box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.15);
     .web-app-title{
-        font-size: 1.5rem;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        letter-spacing: 2px;
+        font-size: 2rem;
         font-weight: 900;
     }
 }

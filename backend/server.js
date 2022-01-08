@@ -2,7 +2,6 @@ require("dotenv").config()
 const port = process.env.PUBLIC_URL || 5000
 const express = require('express')
 const app = express()
-const cors = require('cors')
 const connectDB = require('./db/connect')
 const router = require('./routes/routes')
 

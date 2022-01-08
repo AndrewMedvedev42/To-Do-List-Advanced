@@ -1,31 +1,32 @@
-const ToDo = require("../models/user.model")
+const User = require("../models/user.model")
+const Note = require("../models/to-do.model")
 
-const getAllToDos = async(req,res) => {
+const getAllTodos = async(req,res) => {
     try {
-        const todos = await ToDo.find({})
-        res.status(200).json({todos})
+        const users = await User.find({})
+        res.status(200).json({users})
     } catch (error) {
         res.status(500).json({msg:error})
     }
 }
 
-const createToDo = async(req,res) => {
+const createTodo = async(req,res) => {
     try {
-        const todo = await ToDo.create(req.body)
-        res.status(201).json({todo})
+        const user = await User.create(req.body)
+        res.status(201).json({user})
     } catch (error) {
         res.status(500).json({msg:error})
     }
 }
 
-const getToDo = async(req,res) => {
+const getTodo = async(req,res) => {
     try {
         const {id:taskID} = req.params
-        const todo = await ToDo.findOne({_id:taskID})
-        if(!todo){
-            return res.status(404).json({msg:'NO todo WAS FOUND'})
+        const user = await User.findOne({_id:taskID})
+        if(!user){
+            return res.status(404).json({msg:'NO user WAS FOUND'})
         }
-        res.status(200).json({todo})
+        res.status(200).json({user})
     } catch (error) {
         res.status(500).json({msg:error})
     }
@@ -34,7 +35,7 @@ const getToDo = async(req,res) => {
 const updateToDo = async(req,res) => {
     try {
         const {id:taskID} = req.params
-        const todo = await ToDo.findOneAndUpdate({_id:taskID},req.body,{
+        const todo = await User.findOneAndUpdate({_id:taskID},req.body,{
             new:true,
             runValidators:true
         })
@@ -47,23 +48,23 @@ const updateToDo = async(req,res) => {
     }
 }
 
-const deleteToDo = async(req,res) => {
+const deleteTodo = async(req,res) => {
     try {
         const {id:taskID} = req.params
-        const todo = await ToDo.findOneAndDelete({_id:taskID})
-        if(!todo){
-            return res.status(404).json({msg:'NO todo WAS FOUND'})
+        const user = await User.findOneAndDelete({_id:taskID})
+        if(!user){
+            return res.status(404).json({msg:'NO user WAS FOUND'})
         }
-        res.status(200).json({todo})
+        res.status(200).json({user})
     } catch (error) {
         res.status(500).json({msg:error})
     }
 }
 
-module.exports = {
-    getAllToDos,
-    createToDo,
-    getToDo,
-    updateToDo,
-    deleteToDo
-}
+// module.exports = {
+//     getAllToDos,
+//     createToDo,
+//     getToDo,
+//     updateToDo,
+//     deleteToDo
+// }

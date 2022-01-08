@@ -27,8 +27,7 @@ export const EditUserDetails = () => {
 
         const updatePatch = {
             firstName:ifEmpty(e.target[0].value),
-            lastName:ifEmpty(e.target[1].value),
-            email:ifEmpty(e.target[2].value)
+            lastName:ifEmpty(e.target[1].value)
         }
 
         axios.patch(`http://localhost:5000/api/v1/admin/${user_id}`, updatePatch)
@@ -55,8 +54,6 @@ export const EditUserDetails = () => {
                             <input placeholder="First name" defaultValue={userData.firstName}/>
                             <label htmlFor="">Last name: </label>
                             <input placeholder="Last name" defaultValue={userData.lastName}/>
-                            <label htmlFor="">Email: </label>
-                            <input placeholder="Email" defaultValue={userData.email}/>
                             <button className="submit-button">Update</button>
                         </form>
                         <button className="submit-button"  onClick={()=>{(deleteUserAccount(userData._id))}}>Delete account</button>
