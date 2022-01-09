@@ -9,12 +9,12 @@ export const AdminPage = () => {
         const [userList, setUserList] = useState([])
 
         useEffect(()=>{
-            axios.get('http://localhost:5000/api/v1/admin')
+            axios.get(`${process.env.REACT_APP_SERVER_URL}/api/v1/admin`)
             .then(res => setUserList(res.data.users)).catch(err=>console.log(err));
         },[counter])
 
         const deleteUserAccount = (user_id) => {
-             axios.delete(`http://localhost:5000/api/v1/admin/${user_id}`)
+             axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/v1/users/${user_id}`)
                 .then((res) => {
                     setCounter(counter+1)
                 })
@@ -22,7 +22,7 @@ export const AdminPage = () => {
 
         const updateUserAccount = (e, user_id) => {
             var checkboxStatus = e.target.checked;
-            axios.patch(`http://localhost:5000/api/v1/admin/${user_id}`, {"activeAccount":checkboxStatus})
+            axios.patch(`${process.env.REACT_APP_SERVER_URL}/api/v1/users/${user_id}`, {"activeAccount":checkboxStatus})
                .then((res) => {
                    console.log(res.status)
                })
@@ -35,7 +35,6 @@ export const AdminPage = () => {
                     userList.length ? (      
                         userList.map(item=>{
                             return (
-                                
                                 <article className="white-container">
                                     <img src="https://cdn.iconscout.com/icon/free/png-256/profile-417-1163876.png" alt="user-img" />
                                     <h1>{item.firstName} {item.lastName}</h1>
@@ -45,9 +44,9 @@ export const AdminPage = () => {
                                     <input type="checkbox" onChange={(e)=>{updateUserAccount(e, item._id)}} defaultChecked={item.activeAccount}/>
                                     </form>                                        
                                 
-                                    <button onClick={()=>{deleteUserAccount(item._id)}}>Delete</button>
-                                    <Link to={`/admin/console/user/${item._id}`}>
-                                        <button>Notes</button>
+                                    <button onClick={()=>{deleteUserAccount(item._id)}} className="submit-button">Delete</button>
+                                    <Link to={`/admin/user/${item._id}`}>
+                                        <button>Notes: {item.toDoList.length}</button>
                                     </Link>
                                 </article>
                             )

@@ -5,7 +5,7 @@
         justify-content: center;
         align-items: center;
         img{
-            margin-top: 2rem;
+            margin-top: 1rem;
             border-radius: 25px;
             width: 100px;
             height: 100px;
@@ -14,23 +14,30 @@
             font-size: 2rem;
             margin: 1rem 0 0.5rem;
         }
-        .user-id{
-            margin-bottom: 2rem;
-        }
     }
     .to-do-section{
+    display: flex;
+     flex-direction: column;
+     align-items: center;
         form{
-            margin: 1rem auto;
             width: 30%;
+            button{
+                margin-top: 0.5rem;
+            }
         }
+        .to-do-list{
+            article{
+                margin:0 auto 1rem;
+                padding: 1rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            span{
+                margin:1rem;
+            }
+        }
+    }
+    
         
     }
-    .to-do-list{
-        article{
-            width: 90%;
-            margin:0 auto 1rem;
-            padding: 1rem;
-
-        }
-    }
-}

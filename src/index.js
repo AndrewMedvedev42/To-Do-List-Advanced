@@ -14,6 +14,8 @@ import "./styles/css/pages/login-register-page.css"
 import "./styles/css/pages/user-page.css"
 import "./styles/css/pages/admin-page.css"
 import "./styles/css/pages/admin-console-page.css"
+import "./styles/css/pages/edit-task-page.css"
+import "./styles/css/pages/edit-user-profile.css";
 
 const composeEnchancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 

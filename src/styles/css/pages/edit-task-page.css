@@ -1,0 +1,10 @@
+.edit-task-form {
+  display: flex;
+  flex-direction: column; }
+  .edit-task-form input {
+    padding: 12px 20px;
+    margin: 0.5rem 0;
+    border: 1px solid #ccc;
+    border-radius: 5px; }
+  .edit-task-form div .submit-button {
+    margin-bottom: 1rem; }

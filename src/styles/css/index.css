@@ -11,16 +11,18 @@ label {
 button {
   margin: 0rem 0.5rem 0rem;
   border: none;
-  border-radius: 25px;
+  border-radius: 5px;
   padding: 0.5rem 1rem;
   font-size: 1rem;
   font-weight: 700;
   color: rgba(0, 0, 0, 0.493); }
 
+button:hover {
+  opacity: 0.5; }
+
 .submit-button {
-  margin-top: 1rem;
+  margin: 0.5rem;
   color: white;
-  border-radius: 50px;
   background: linear-gradient(145deg, #c070dc, #a15fb9); }
 
 .form {
@@ -29,11 +31,13 @@ button {
   .form label {
     margin-bottom: 1rem; }
   .form input, .form textarea {
-    font-size: 1rem;
-    border: rgba(0, 0, 0, 0.459) 1px solid;
-    border-radius: 20px;
-    padding: 10px 12px;
-    margin-bottom: 1rem; }
+    width: 100%;
+    padding: 12px 20px;
+    margin: 0.5rem 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; }
 
 .white-container {
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.15);

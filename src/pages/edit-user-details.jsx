@@ -4,13 +4,13 @@ import { useEffect, useState } from "react"
 import axios from 'axios';
 
 export const EditUserDetails = () => {
+    const history = useNavigate();
     const [userData, setUserData] = useState(null)
     const pathID = useLocation().pathname.split('/')[2]
 
-    const history = useNavigate();
 
     useEffect(()=>{
-        axios.get(`http://localhost:5000/api/v1/admin/user/${pathID}`)
+        axios.get(`${process.env.REACT_APP_SERVER_URL}/api/v1/users/${pathID}`)
         .then(res => setUserData(res.data.user)).catch(err=>console.log(err));
     },[])
 
@@ -30,14 +30,14 @@ export const EditUserDetails = () => {
             lastName:ifEmpty(e.target[1].value)
         }
 
-        axios.patch(`http://localhost:5000/api/v1/admin/${user_id}`, updatePatch)
+        axios.patch(`${process.env.REACT_APP_SERVER_URL}/api/v1/users/${user_id}`, updatePatch)
            .then((res) => {
                alert("Profile updated")
            })
    }
 
    const deleteUserAccount = (user_id) => {
-    axios.delete(`http://localhost:5000/api/v1/admin/${user_id}`)
+    axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/v1/users/${user_id}`)
        .then((res) => {
            alert("Account Sucsesfully deleted")
            history("/")
@@ -49,7 +49,7 @@ export const EditUserDetails = () => {
             {
                 userData && (
                     <section className="white-container">
-                        <form className="form" onSubmit={(e)=>{updateUserInfo(e, userData._id)}}>
+                        <form className="form edit-user-details" onSubmit={(e)=>{updateUserInfo(e, userData._id)}}>
                             <label htmlFor="">First name: </label>
                             <input placeholder="First name" defaultValue={userData.firstName}/>
                             <label htmlFor="">Last name: </label>

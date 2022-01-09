@@ -2,13 +2,13 @@ import {useLocation} from "react-router-dom"
 import { useEffect, useState } from "react"
 import axios from 'axios';
 
-export const AdminUserConsole = () => {
+export const AdminUserInfo = () => {
     const [userData, setUserData] = useState()
 
-    const pathID = useLocation().pathname.split('/')[4]
+    const pathID = useLocation().pathname.split('/')[3]
 
     useEffect(()=>{
-        axios.get(`http://localhost:5000/api/v1/admin/user/${pathID}`)
+        axios.get(`${process.env.REACT_APP_SERVER_URL}/api/v1/users/${pathID}`)
         .then(res => setUserData(res.data.user)).catch(err=>console.log(err));
     },[])
 
@@ -25,10 +25,15 @@ export const AdminUserConsole = () => {
                         <section className="user-todo-list">
                             {
                                 userData.toDoList.length ? (
-                                    <article className="white-container">
-                                        <h2>To-Do title</h2>
-                                        <p>To-Do text</p>
-                                    </article>   
+                                    userData.toDoList.map(item=>{
+                                        return (
+                                            <article className="white-container">
+                                                <h2 className={item.completed ? "crossed":""}>{item.title}</h2>
+                                                {item.completed ? (<span>Completed: {item.completionDate}</span>)
+                                                :""}
+                                            </article>   
+                                        )
+                                    })
                                 ) : <h2>No notes yet</h2>
                             }         
                         </section> 

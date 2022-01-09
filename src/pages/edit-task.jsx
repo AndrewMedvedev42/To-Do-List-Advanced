@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react"
 import axios from 'axios';
 
-export const EditToDoPage = () => {
+export const EditTaskPage = () => {
     const [taskData, setTaskData] = useState()
     const pathID = useLocation().pathname.split('/')[2]
     const taskID = useLocation().pathname.split('/')[4]
@@ -11,7 +11,7 @@ export const EditToDoPage = () => {
     const history = useNavigate();
 
     useEffect(()=>{
-        axios.get(`http://localhost:5000/api/v1/task/${pathID}`)
+        axios.get(`${process.env.REACT_APP_SERVER_URL}/api/v1/users/${pathID}`)
             .then(res =>
                 res.data.user.toDoList.filter(item=>{
                     item._id == taskID && setTaskData(item)
@@ -47,23 +47,22 @@ export const EditToDoPage = () => {
             completed:e.target[1].checked,
             completionDate:ifIsComleted(e.target[1].checked)
         }
-        axios.patch(`http://localhost:5000/api/v1/task/${pathID}?taskID=${taskID}`, updateTaskPatch)
+        axios.patch(`${process.env.REACT_APP_SERVER_URL}/api/v1/task/${pathID}?taskID=${taskID}`, updateTaskPatch)
             .then(res => alert("Successfully updated"))
             .catch(err=>console.log(err));
     }
 
     return (
-        <section>
+        <section className="white-container">
             {
                 taskData && (
                     <>
-                    <form onSubmit={updateNote} className="white-container form" action="">
+                    <form onSubmit={updateNote} className="edit-task-form" action="">
                             <label htmlFor="">Change task title: </label>
                             <input type="text" placeholder="Title" defaultValue={taskData.title}/>
-                            <label>Done:</label>
-                            <input type="checkbox" defaultChecked={taskData.completed}/>
+                            <label>Done:<input type="checkbox" defaultChecked={taskData.completed}/></label>
                             <div>
-                                <button>Update</button>
+                                <button className="submit-button">Update</button>
                             </div>
                     </form>
                     <button onClick={()=>history(-1)}>Back</button>
