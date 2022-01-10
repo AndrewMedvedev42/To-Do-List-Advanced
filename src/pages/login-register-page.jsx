@@ -1,8 +1,14 @@
 import axios from 'axios';
-import { useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import { useNavigate } from "react-router-dom";
 
 export const LoginRegisterPage = () => {
+
+    useEffect(()=>{
+        window.sessionStorage.setItem("M0NTY3ODkw", JSON.stringify({role:"Customer"}));
+    },[])
+  
+
     return (
         <section className="login-register-page">
             <section className="forms-container">
@@ -114,7 +120,7 @@ const RegisterSection = () => {
 const AdminLogin = () => {
     const [adminEmail, setAdminEmail] = useState(null)
     const [adminPassword, setAdminPassword] = useState(null)
-    const [adminTokken, setAdminTokken] = useState(null)
+    const [adminToken, setAdminToken] = useState(null)
 
     const mailValidation= /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -125,10 +131,11 @@ const AdminLogin = () => {
         if (adminEmail.match(mailValidation)) {
             if (adminEmail === process.env.REACT_APP_ADMIN_EMAIL){
                 if (adminPassword === process.env.REACT_APP_ADMIN_PASSWORD) {
-                    if (adminTokken === process.env.REACT_APP_ADMIN_TOKKEN) {
+                    if (adminToken === process.env.REACT_APP_ADMIN_TOKEN) {
+                        window.sessionStorage.setItem("M0NTY3ODkw", JSON.stringify({role:"ADMIN"}));
                         history("/admin");
                     } else {
-                        alert("Sorry, incorrect tokken");
+                        alert("Sorry, incorrect token");
                     }
                 } else {
                     alert("Sorry, incorrect password");
@@ -146,7 +153,7 @@ const AdminLogin = () => {
             <h1>Log in as Admin</h1>
             <input placeholder="Email" onChange={(e)=>{setAdminEmail(e.target.value)}} required/>
             <input placeholder="Password" onChange={(e)=>{setAdminPassword(e.target.value)}} required/>
-            <input placeholder="Admin Key" onChange={(e)=>{setAdminTokken(e.target.value)}} required/>
+            <input placeholder="Admin Key" onChange={(e)=>{setAdminToken(e.target.value)}} required/>
             <button className="submit-button">Log in as an Admin</button>
         </form>
     )

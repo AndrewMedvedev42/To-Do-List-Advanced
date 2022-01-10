@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Task = require("../models/to-do.model")
+const Task = require("./task.model")
 
 const UserSchema = new mongoose.Schema({
     firstName:{
@@ -30,10 +30,10 @@ const UserSchema = new mongoose.Schema({
          type:Boolean,
          default:true
     },
-    isNewUser:{
-        type:Boolean,
-        default:true
-   },
+    role:{
+        type:String,
+         default:"Customer"
+    },
     toDoList:[Task.schema]
 })
 

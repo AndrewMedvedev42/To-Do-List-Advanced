@@ -7,6 +7,11 @@ const ToDoSchema = new mongoose.Schema({
         trim:true,
         maxlength:[20, 'no longer than 20 characters']
     },
+    description:{
+        type:String,
+        required:[true, 'must providename'],
+        trim:true,
+    },
     completed:{
         type:Boolean,
         default:false

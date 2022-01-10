@@ -5,6 +5,7 @@ import axios from 'axios';
 
 export const EditTaskPage = () => {
     const [taskData, setTaskData] = useState()
+    const [disabledButton, setDisabledButton] = useState(true)
     const pathID = useLocation().pathname.split('/')[2]
     const taskID = useLocation().pathname.split('/')[4]
 
@@ -31,11 +32,19 @@ export const EditTaskPage = () => {
         }
     }
 
-    const ifEmpty = (i) => {
-        if (! isNaN(i)) {
-            return "Task title"
+    const ifEmpty = (i, content_type) => {
+        if (content_type !== "title") {
+            if (!Boolean(i) && !isNaN(i)) {
+                return "Task description"
+            }else{
+                return i
+            }
         }else{
-            return i
+            if (!Boolean(i) && !isNaN(i)) {
+                return "Task title"
+            }else{
+                return i
+            }
         }
     }
 
@@ -43,31 +52,36 @@ export const EditTaskPage = () => {
         e.preventDefault()
 
         const updateTaskPatch = {
-            title:ifEmpty(e.target[0].value),
-            completed:e.target[1].checked,
-            completionDate:ifIsComleted(e.target[1].checked)
+            title:ifEmpty(e.target[0].value, "title"),
+            description:ifEmpty(e.target[1].value),
+            completed:e.target[2].checked,
+            completionDate:ifIsComleted(e.target[2].checked)
         }
+
+        console.log(updateTaskPatch);
         axios.patch(`${process.env.REACT_APP_SERVER_URL}/api/v1/task/${pathID}?taskID=${taskID}`, updateTaskPatch)
-            .then(res => alert("Successfully updated"))
+            .then(res => alert("Successfully updated"), setDisabledButton(true))
             .catch(err=>console.log(err));
     }
 
     return (
+        <section>
+            <button className="back-button" onClick={()=>history(-1)}>Back</button>
         <section className="white-container">
             {
                 taskData && (
                     <>
                     <form onSubmit={updateNote} className="edit-task-form" action="">
                             <label htmlFor="">Change task title: </label>
-                            <input type="text" placeholder="Title" defaultValue={taskData.title}/>
-                            <label>Done:<input type="checkbox" defaultChecked={taskData.completed}/></label>
-                            <div>
-                                <button className="submit-button">Update</button>
-                            </div>
+                            <input maxlength="20" onChange={()=>{setDisabledButton(false)}} type="text" placeholder="Title" defaultValue={taskData.title}/>
+                            <textarea onChange={()=>{setDisabledButton(false)}} defaultValue={taskData.description} rows="5"></textarea>
+                            <label>Done:<input onChange={()=>{setDisabledButton(false)}} type="checkbox" defaultChecked={taskData.completed}/></label>
+                            <button disabled={disabledButton} className={ disabledButton ? "disabled-button" : "submit-button"}>Update</button>
                     </form>
-                    <button onClick={()=>history(-1)}>Back</button>
+
                     </>                                
                 )
             }
+                    </section>
         </section>)
 }

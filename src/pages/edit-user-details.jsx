@@ -45,11 +45,12 @@ export const EditUserDetails = () => {
 }
 
     return (
-        <section>
+        <section className="edit-user-details">
+            <button className="back-button"  onClick={()=>{(history(-1))}}>Back</button>
             {
                 userData && (
                     <section className="white-container">
-                        <form className="form edit-user-details" onSubmit={(e)=>{updateUserInfo(e, userData._id)}}>
+                        <form className="form" onSubmit={(e)=>{updateUserInfo(e, userData._id)}}>
                             <label htmlFor="">First name: </label>
                             <input placeholder="First name" defaultValue={userData.firstName}/>
                             <label htmlFor="">Last name: </label>
@@ -57,7 +58,6 @@ export const EditUserDetails = () => {
                             <button className="submit-button">Update</button>
                         </form>
                         <button className="submit-button"  onClick={()=>{(deleteUserAccount(userData._id))}}>Delete account</button>
-                        <button className="submit-button"  onClick={()=>{(history(-1))}}>Back</button>
                     </section>
                 )
             }

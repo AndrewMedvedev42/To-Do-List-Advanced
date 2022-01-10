@@ -1,30 +1,29 @@
 .user-page .user-details-container {
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center; }
   .user-page .user-details-container img {
-    margin-top: 1rem;
-    border-radius: 25px;
-    width: 100px;
-    height: 100px; }
-  .user-page .user-details-container .user-name {
-    font-size: 2rem;
-    margin: 1rem 0 0.5rem; }
+    width: 200px;
+    height: 200px; }
 
-.user-page .to-do-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center; }
-  .user-page .to-do-section form {
-    width: 30%; }
-    .user-page .to-do-section form button {
-      margin-top: 0.5rem; }
-  .user-page .to-do-section .to-do-list article {
-    margin: 0 auto 1rem;
-    padding: 1rem;
+.user-page .create-task-section .task-list article .task-title {
+  font-size: 1.5rem; }
+
+.user-page .create-task-section .task-list article p {
+  font-size: 1.2rem; }
+
+.user-page .create-task-section .task-list article span {
+  font-size: 1rem; }
+
+@media (min-width: 750px) {
+  .user-page .user-details-container {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center; }
-  .user-page .to-do-section .to-do-list span {
-    margin: 1rem; }
+    .user-page .user-details-container img {
+      width: 100px;
+      height: 100px; }
+  .user-page .create-task-section {
+    width: 40%;
+    margin: 0 auto; } }

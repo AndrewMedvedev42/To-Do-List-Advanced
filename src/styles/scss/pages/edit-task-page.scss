@@ -10,9 +10,22 @@
         border: 1px solid #ccc;
         border-radius: 5px;
     }
+    textarea{
+        width: 100%;
+        padding: 12px 20px;
+        margin: 0.5rem 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
     div{
             .submit-button{
                 margin-bottom: 1rem;
             }
     }
+}
+
+.back-button{
+    margin-top: 1rem;
 }

@@ -6,5 +6,16 @@
     margin: 0.5rem 0;
     border: 1px solid #ccc;
     border-radius: 5px; }
+  .edit-task-form textarea {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 0.5rem 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; }
   .edit-task-form div .submit-button {
     margin-bottom: 1rem; }
+
+.back-button {
+  margin-top: 1rem; }

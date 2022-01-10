@@ -1,3 +1,7 @@
+*{
+    transition: 0.5s;
+}
+
 body{
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -5,10 +9,6 @@ body{
 
 a, button{
     cursor: pointer;
-}
-
-label{
-    font-size: 1.2rem;
 }
 
 button{
@@ -31,12 +31,23 @@ button:hover{
     background: linear-gradient(145deg, #c070dc, #a15fb9);
 }
 
+.disabled-button{
+    margin: 0.5rem;
+    color: white;
+    background-color: rgb(184, 184, 184);
+}
+
+.disabled-button:hover{
+    opacity: 1;
+}
+
+.warning-message{
+    text-align: center;
+}
+
 .form{
     display: flex;
     flex-direction: column;
-    label{
-        margin-bottom: 1rem;
-    }
     input, textarea{
         width: 100%;
         padding: 12px 20px;

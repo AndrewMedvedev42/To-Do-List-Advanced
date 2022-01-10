@@ -1,16 +1,48 @@
 .admin-page{
     section{
-        width: 80%;
-        margin: 1rem auto 2rem;
-            text-decoration: none;
-            article{
+        .user-info-card > * {
+            margin: 0 10px;
+        }
+        .user-info-card{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            img{
+                width: 100px;
+                height: 100px;
+            }
+            form{
+                text-align: center;
+            }
+            div{
                 display: flex;
-                justify-content: space-around;
-                align-items: center;
-                img{
-                    width: 100px;
-                    height: 100px;
+                button{
+                    margin: 0 10px;
                 }
             }
+        }
+    }
+}
+
+@media (max-width: 830px) {
+    .admin-page{
+        section{
+            .user-info-card{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                img{
+                    width: 200px;
+                    height: 200px;
+                }
+                h1{
+                    font-size: 1.3rem;
+                    margin: 1rem 0rem;
+                }
+                form{
+                    margin: 1rem 0rem;
+                }
+            }
+        }
     }
 }

@@ -30,17 +30,29 @@ export const UserPage = () => {
 
     const submitTask = (e, item_id) => {
         e.preventDefault();
-        const ifEmpty = (i) => {
-            if (!isNaN(i)) {
-                return "Task title"
+
+        const ifEmpty = (i, content_type) => {
+            if (content_type !== "title") {
+                if (!Boolean(i) && !isNaN(i)) {
+                    return "Task description"
+                }else{
+                    return i
+                }
             }else{
-                return i
+                if (!Boolean(i) && !isNaN(i)) {
+                    return "Task title"
+                }else{
+                    return i
+                }
             }
         }
 
         const taskInfo = {
-            title:ifEmpty(e.target[0].value),
+            title:ifEmpty(e.target[0].value, "title"),
+            description:ifEmpty(e.target[1].value)
         }
+
+        console.log(taskInfo);
 
         axios.post(`${process.env.REACT_APP_SERVER_URL}/api/v1/task/${item_id}`, taskInfo)
         .then(res => setCount(count+1)).catch(err=>console.log(err));
@@ -58,28 +70,29 @@ export const UserPage = () => {
                 userData ? (
                     <>
                     <section className="user-details-container">
-                    <img src="https://cdn.iconscout.com/icon/free/png-256/profile-417-1163876.png" alt="user-img" />
-                    <h1 className="user-name">{userData.firstName} {userData.lastName}</h1>
-                    <span className="user-id">User ID: {userData._id}</span>
-                    <Link to={`/users/${userData._id}/user-details`}>
-                        <button className="submit-button">Edit Deatils</button>
-                    </Link>
-                </section>
+                        <img src="https://cdn.iconscout.com/icon/free/png-256/profile-417-1163876.png" alt="user-img" />
+                        <h1 className="user-name">{userData.firstName} {userData.lastName}</h1>
+                        <span className="user-id">UID: {userData._id}</span>
+                        <Link to={`/users/${userData._id}/user-details`}>
+                            <button className="submit-button">Edit Deatils</button>
+                        </Link>
+                    </section>
     
-                <section className="to-do-section">
-                    <form onSubmit={(e)=>{(submitTask(e, userData._id))}} className="white-container form" action="">
-                        <h2>Create to do</h2>
-                        <input placeholder="Title" />
-                        <button className="submit-button">Create</button>
-                    </form>
-    
-                    <section className="to-do-list">
+                    <section className="create-task-section">
+                        <form onSubmit={(e)=>{(submitTask(e, userData._id))}} className="white-container form" action="">
+                            <h2>Create to do</h2>
+                            <input placeholder="Title" />
+                            <textarea placeholder="Description" name="" id="" cols="30" rows="10"></textarea>
+                            <button className="submit-button">Create</button>
+                        </form>
+                    <section className="task-list">
                         {
                             userTaskList.length ? (
                                 userTaskList.map(item=>{
                                     return (
                                         <article key={item._id} className="white-container">
-                                            <h2 className={item.completed ? "crossed":""}>{item.title}</h2>
+                                            <h2 className={`task-title ${item.completed ? "crossed":""}`}>{item.title}</h2>
+                                            <p>{item.description}</p>
                                             {item.completed ? (<span>Completed: {item.completionDate}</span>)
                                             :""}
                                             <div>

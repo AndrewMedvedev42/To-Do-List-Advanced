@@ -13,14 +13,15 @@ export const AdminUserInfo = () => {
     },[])
 
     return (
-        <section className="admin-console-page">
+        <section className="admin-user-info-page">
             {
                 userData && (
                     <>
                         <article className="white-container user-details">
                             <img src="https://cdn.iconscout.com/icon/free/png-256/profile-417-1163876.png" alt="user-img" />
                             <h1>{userData.firstName} {userData.lastName}</h1>
-                            <span>{userData._id}</span>
+                            <span>UID: {userData._id}</span>
+                            <span>User email: {userData.email}</span>
                         </article>    
                         <section className="user-todo-list">
                             {
@@ -31,6 +32,7 @@ export const AdminUserInfo = () => {
                                                 <h2 className={item.completed ? "crossed":""}>{item.title}</h2>
                                                 {item.completed ? (<span>Completed: {item.completionDate}</span>)
                                                 :""}
+                                                <p>{item.description}</p>
                                             </article>   
                                         )
                                     })

@@ -1,12 +1,12 @@
+* {
+  transition: 0.5s; }
+
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif; }
 
 a, button {
   cursor: pointer; }
-
-label {
-  font-size: 1.2rem; }
 
 button {
   margin: 0rem 0.5rem 0rem;
@@ -25,11 +25,20 @@ button:hover {
   color: white;
   background: linear-gradient(145deg, #c070dc, #a15fb9); }
 
+.disabled-button {
+  margin: 0.5rem;
+  color: white;
+  background-color: #b8b8b8; }
+
+.disabled-button:hover {
+  opacity: 1; }
+
+.warning-message {
+  text-align: center; }
+
 .form {
   display: flex;
   flex-direction: column; }
-  .form label {
-    margin-bottom: 1rem; }
   .form input, .form textarea {
     width: 100%;
     padding: 12px 20px;

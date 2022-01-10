@@ -7,3 +7,10 @@
         justify-content: center;
     }
 }
+
+@media (max-width: 600px) {
+    .login-register-page{
+        .forms-container{
+        flex-direction: column;
+    }}
+}
