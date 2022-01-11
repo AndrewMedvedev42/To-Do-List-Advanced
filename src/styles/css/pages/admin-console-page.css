@@ -1,9 +1,16 @@
-.admin-user-info-page .user-details {
+.admin-user-info-page .container {
   display: flex;
   flex-direction: column;
-  justify-content: center; }
+  justify-content: center;
+  align-items: flex-start; }
+  .admin-user-info-page .container .user-details {
+    text-align: center; }
+  .admin-user-info-page .container p {
+    margin-top: 1rem; }
+    .admin-user-info-page .container p span {
+      font-weight: bolder; }
 
 @media (min-width: 990px) {
-  .admin-user-info-page {
+  .admin-user-info-page .container {
     display: grid;
     grid-template-columns: 30% 70%; } }

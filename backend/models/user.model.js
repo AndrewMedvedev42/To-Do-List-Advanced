@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Task = require("./task.model")
-
+//USER MODEL SCHEMA
 const UserSchema = new mongoose.Schema({
     firstName:{
         type:String,

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-
-const ToDoSchema = new mongoose.Schema({
+//TASK MODEL SCHEMA
+const TaskSchema = new mongoose.Schema({
     title:{
         type:String,
         required:[true, 'must providename'],
@@ -22,4 +22,4 @@ const ToDoSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('Task', ToDoSchema)
+module.exports = mongoose.model('Task', TaskSchema)

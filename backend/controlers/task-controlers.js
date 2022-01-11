@@ -1,7 +1,8 @@
 const User = require("../models/user.model")
-const Task = require("../models/to-do.model")
+const Task = require("../models/task.model")
 
-const createTodo = async(req,res) => { 
+//ADDS TASK INFO INTO DATA BASE
+const createTask = async(req,res) => { 
     try {
         const {id:taskID} = req.params
         const user = await User.findOne({_id:taskID}, function(err, user){
@@ -16,7 +17,8 @@ const createTodo = async(req,res) => {
     }
 }
 
-const updateTodo = async(req,res) => {
+//UPDATES TASK INFO IN DATA BASE
+const updateTask = async(req,res) => {
     try {
         const {id:taskID} = req.params
         const user = await User.findOne({_id:taskID}, function(err, user){
@@ -38,7 +40,8 @@ const updateTodo = async(req,res) => {
     }
 }
 
-const deleteTodo = async(req,res) => {
+//DELETES TASK FROM DATA BASE
+const deleteTask = async(req,res) => {
     try {
         const {id:taskID} = req.params
         const user = await User.findOne({_id:taskID}, function(err, user){
@@ -53,8 +56,9 @@ const deleteTodo = async(req,res) => {
     }
 }
 
+//EXPORT OF CONTROLERS
 module.exports = {
-    createTodo,
-    updateTodo,
-    deleteTodo
+    createTask,
+    updateTask,
+    deleteTask
 }

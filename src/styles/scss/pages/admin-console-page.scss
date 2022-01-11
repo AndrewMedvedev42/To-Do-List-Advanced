@@ -1,14 +1,26 @@
 .admin-user-info-page{
-    .user-details{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+    .container{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            .user-details{
+                text-align: center;
+            }
+            p{
+                margin-top: 1rem;
+                span{
+                    font-weight: bolder;
+                }
+            }
     }
 }
 
 @media (min-width: 990px) {
     .admin-user-info-page{
-        display: grid;
-        grid-template-columns: 30% 70%;
+        .container{
+            display: grid;
+            grid-template-columns: 30% 70%;
+        }
     }
 }

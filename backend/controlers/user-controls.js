@@ -1,5 +1,6 @@
 const User = require("../models/user.model")
 
+//GETS ALL USERS FROM DATA BASE
 const getAllUsers = async(req,res) => {
     const users = User.find({})
     console.log(users);
@@ -11,6 +12,7 @@ const getAllUsers = async(req,res) => {
     }
 }
 
+//POSTS NEW USER INTO DATA BASE
 const createUser = async(req,res) => {
     try {
         const user = await User.create(req.body)
@@ -20,6 +22,7 @@ const createUser = async(req,res) => {
     }
 }
 
+//GETS USER FROM DATA BASE
 const getUser = async(req,res) => {
     try {
         const {id:taskID} = req.params
@@ -33,6 +36,7 @@ const getUser = async(req,res) => {
     }
 }
 
+//GETS USER FROM DATA BASE BY EMAIL
 const getUserByEmail = async(req,res) => {
     try {
         const {email} = req.query
@@ -46,6 +50,7 @@ const getUserByEmail = async(req,res) => {
     }
 }
 
+//UPDATES USER IN DATA BASE
 const updateUser = async(req,res) => {
     try {
         const {id:taskID} = req.params
@@ -62,6 +67,7 @@ const updateUser = async(req,res) => {
     }
 }
 
+//DELETES USER FROM DATA BASE
 const deleteUser = async(req,res) => {
     try {
         const {id:taskID} = req.params
@@ -75,6 +81,7 @@ const deleteUser = async(req,res) => {
     }
 }
 
+//EXPORT OF CONTROLERS
 module.exports = {
     getAllUsers,
     createUser,

@@ -8,9 +8,12 @@
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 680px) {
     .login-register-page{
         .forms-container{
         flex-direction: column;
+        form{
+            width: 100%;
+        }
     }}
 }

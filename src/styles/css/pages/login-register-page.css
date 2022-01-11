@@ -5,6 +5,8 @@
   align-items: center;
   justify-content: center; }
 
-@media (max-width: 600px) {
+@media (max-width: 680px) {
   .login-register-page .forms-container {
-    flex-direction: column; } }
+    flex-direction: column; }
+    .login-register-page .forms-container form {
+      width: 100%; } }

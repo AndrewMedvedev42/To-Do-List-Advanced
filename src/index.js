@@ -1,8 +1,10 @@
+//REACT APP SETUP
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+//STYLES
 import "./styles/css/index.css"
 import "./styles/css/navigation-menu.css"
 import "./styles/css/pages/login-register-page.css"

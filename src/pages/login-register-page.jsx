@@ -1,14 +1,9 @@
 import axios from 'axios';
-import {useEffect, useState} from 'react';
-import { useNavigate } from "react-router-dom";
+import {useState, useEffect} from 'react';
+import {useNavigate} from "react-router-dom";
 
+//BASE COMPONENT OF THE PAGE
 export const LoginRegisterPage = () => {
-
-    useEffect(()=>{
-        window.sessionStorage.setItem("M0NTY3ODkw", JSON.stringify({role:"Customer"}));
-    },[])
-  
-
     return (
         <section className="login-register-page">
             <section className="forms-container">
@@ -19,42 +14,55 @@ export const LoginRegisterPage = () => {
         </section>)
 }
 
+//LOGIN FROM COMPONENT
 const LoginSection = () => {
+            //COMPONENT'S STATE
+    const [userLoginEmail, setUserLoginEmail] = useState("")
+    const [userLoginPassword, setUserLoginPassword] = useState("")
+      //SETS ROLE TO SESSION STORAGE TO LIMIT ACCESS
+    useEffect(()=>{
+        window.sessionStorage.setItem("M0NTY3ODkw", JSON.stringify({role:"Customer"}));
+      },[])
+        //USE NAVIGATE TO MOVE BETWEEN PAGES
     const history = useNavigate();
+        //VAILDATION SYMBOLS TO CHECK IF TYPED EMAIL CAN BE USED AS REAL EMAIL
     const mailValidation= /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    const [userLoginEmail, setUserLoginEmail] = useState(null)
-    const [userLoginPassword, setUserLoginPassword] = useState(null)
-
+    const passwordValidation = /^\S+$/
+        //CHECKS EXISTING ACCOUNT FOR ACCESS
     const userCheckProcces = (data) => {
         const {password, activeAccount, _id} = data.data.user
             if (userLoginPassword === password) {
                 if (activeAccount === true) {
+                    window.sessionStorage.setItem("M0NTY3ODkw", JSON.stringify({role:"Customer", userID:_id}));
                     history(`/users/${_id}`)
                 } else {
                     alert("Sorry, your account is inactive!")
                 }
             }else{
-                alert("wrong password")
+                alert("Wrong password, please try again.")
             }
     }
-
+        //FINDS USER INFO FOR FURTHER VALIDATION
     const getUserDataByLogin = (e) => {
         e.preventDefault();
-
         if (userLoginEmail.match(mailValidation)) {
-            axios
-                .get(`${process.env.REACT_APP_SERVER_URL}/api/v1/login_register?email=${userLoginEmail}`)
-                .then(res => {
-                    userCheckProcces(res)
-                })
-                .catch(err => {
-                    alert("Account with this email doesn't exist")
-                })
+            if (userLoginPassword.match(passwordValidation)) {
+                axios
+                    .get(`${process.env.REACT_APP_SERVER_URL}/api/v1/login_register?email=${userLoginEmail}`)
+                    .then(res => {
+                        userCheckProcces(res)
+                    })
+                    .catch(err => {
+                        alert("Sorry, user was not found")
+                    })
+            }else{
+                alert("Password is typed incorrectly, please try again.")
+            }
         } else {
-            alert("Email is typed incorrectly")
+            alert("Email is typed incorrectly, please try again.")
         }
     } 
+        //COMPONET'S JSX
     return (
         <form onSubmit={getUserDataByLogin} className="white-container form" action="">
             <h1>Log in</h1>
@@ -65,93 +73,102 @@ const LoginSection = () => {
     )
 }
 
+//COMPONENT FOR REGISTER OF USER 
 const RegisterSection = () => {
-    const [userFirstName, setUserFirstName] = useState(null)
-    const [userLastName, setUserLastName] = useState(null)
-    const [userEmail, setUserEmail] = useState(null)
-    const [userPassword, setUserPassword] = useState(null)
-
-    const mailValidation= /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
+        //COMPONENT'S STATES
+    const [userFirstName, setUserFirstName] = useState("")
+    const [userLastName, setUserLastName] = useState("")
+    const [userEmail, setUserEmail] = useState("")
+    const [userPassword, setUserPassword] = useState("")
+        //VAILDATION SYMBOLS TO CHECK IF TYPED EMAIL OR PASSWORD CAN BE USED AS REAL EMAIL AND PASSWORD
+        const emailValidation = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        const passwordValidation = /^\S+$/
+        //PROCESS OF DEPLOYING REGISTER INFO INTO DATABASE
     const startRegisterProcess = (e) => {
         e.preventDefault();
-        if (userEmail.match(mailValidation)) {
-            axios
-                .get(`${process.env.REACT_APP_SERVER_URL}/api/v1/login_register?email=${userEmail}`)
-                .then(res => alert("Sorry, this email already exists."))
-                .catch(err => {
-                    const bodyData = {
-                        firstName:userFirstName,
-                        lastName:userLastName,
-                        email:userEmail,
-                        password:userPassword,
-                        activeAccount:true,
-                        isNewUser:true,
-                        toDoList:[]
-                    }
-
-                axios
-                .post(`${process.env.REACT_APP_SERVER_URL}/api/v1/login_register`, bodyData)
-                .then(res => {
-                    alert("Successfull register");
+        const ifEmptyUserData = (i, content_type) => {
+                if (!Boolean(i) && !isNaN(i)) {
+                    return "--"
+                }else{
+                    return i
+                }
+        }
+        //FINDS IF EMAIL ALREADY EXISTS AND CHECKS IF TYPED EMAIL OR PASSWORD CAN BE USED AS REAL EMAIL OR PASSWORD
+        if (userEmail.match(emailValidation)) {
+            if(userPassword.match(passwordValidation)){
+                    axios
+                    .get(`${process.env.REACT_APP_SERVER_URL}/api/v1/login_register?email=${userEmail}`)
+                    .then(res => alert("Sorry, account with this email already exists."))
+                    .catch(err => {
+                        //IF EMAIL NOT FOUND, CREATES NEW USER ACCOUNT
+                        const bodyData = {
+                            firstName:ifEmptyUserData(userFirstName),
+                            lastName:ifEmptyUserData(userLastName),
+                            email:userEmail,
+                            password:userPassword,
+                            toDoList:[]
+                        }
+                        //POSTS NEW USER INFO INTO DATABASE
+                        axios
+                            .post(`${process.env.REACT_APP_SERVER_URL}/api/v1/login_register`, bodyData)
+                            .then(res => {
+                                alert("Account successfully registered. Please procced to the Login section");
+                            })
+                            .catch(err => {
+                                alert("Please, type your details correctly")
+                            });
                 })
-                .catch(err => {
-                    console.log(err);
-                });
-            
-                })
+            }else{
+                alert("Password is typed incorrectly, please try again.")
+            }
         } else {
-            alert("Email is typed incorrectly")
+            alert("Email is typed incorrectly, please try again.")
         }
     } 
-    
+        //COMPONET'S JSX
     return (
         <form onSubmit={startRegisterProcess} className="white-container form">
-            <h1>Register</h1>
-            <input placeholder="First name" onChange={(e)=>{setUserFirstName(e.target.value)}} required/>
-            <input placeholder="Last name" onChange={(e)=>{setUserLastName(e.target.value)}} required/>
-            <input placeholder="Email" type="emailitem_id" onChange={(e)=>{setUserEmail(e.target.value)}} required/>
-            <input placeholder="Password" onChange={(e)=>{setUserPassword(e.target.value)}} required/>
+            <h1>Register an account</h1>
+                <input maxLength="40" placeholder="First name" onChange={(e)=>{setUserFirstName(e.target.value)}} required/>
+                <input maxLength="40" placeholder="Last name" onChange={(e)=>{setUserLastName(e.target.value)}} required/>
+                <input maxLength="20" placeholder="Email" type="emailitem_id" onChange={(e)=>{setUserEmail(e.target.value)}} required/>
+                <input maxLength="20" placeholder="Password" onChange={(e)=>{setUserPassword(e.target.value)}} required/>
             <button className="submit-button">Register</button>
         </form>
     )
 }
 
+//LOGIN  COMPONENT FOR ADMIN
 const AdminLogin = () => {
+        //COMPONENT'S STATES
     const [adminEmail, setAdminEmail] = useState(null)
     const [adminPassword, setAdminPassword] = useState(null)
     const [adminToken, setAdminToken] = useState(null)
-
-    const mailValidation= /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
+        //USE NAVIGATE TO MOVE BETWEEN PAGES
     const history = useNavigate();
-
+        //PROCESS TO CHECK FOR CORRECT ADMIN CREDENTIALS
     const AdminPass = (e) => {
         e.preventDefault();
-        if (adminEmail.match(mailValidation)) {
             if (adminEmail === process.env.REACT_APP_ADMIN_EMAIL){
                 if (adminPassword === process.env.REACT_APP_ADMIN_PASSWORD) {
                     if (adminToken === process.env.REACT_APP_ADMIN_TOKEN) {
                         window.sessionStorage.setItem("M0NTY3ODkw", JSON.stringify({role:"ADMIN"}));
                         history("/admin");
                     } else {
-                        alert("Sorry, incorrect token");
+                        alert("Incorrect token, please try again.");
                     }
                 } else {
-                    alert("Sorry, incorrect password");
+                    alert("Incorrect password, please try again.");
                 }
             }else{
-                alert("Sorry, incorrect email");
+                alert("Incorrect email, please try again.");
             }
-        }else{
-            alert("Email is typed incorrectly")
-        }
     }
-    
+        //COMPONENT'S JSX
     return (
         <form onSubmit={AdminPass} className="white-container form">
             <h1>Log in as Admin</h1>
-            <input placeholder="Email" onChange={(e)=>{setAdminEmail(e.target.value)}} required/>
+            <input  placeholder="Email" onChange={(e)=>{setAdminEmail(e.target.value)}} required/>
             <input placeholder="Password" onChange={(e)=>{setAdminPassword(e.target.value)}} required/>
             <input placeholder="Admin Key" onChange={(e)=>{setAdminToken(e.target.value)}} required/>
             <button className="submit-button">Log in as an Admin</button>

@@ -1,9 +1,6 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+//IMPORTS OF PAGES
 import { NavigationMenu } from "./components/navigation-menu";
 import { LoginRegisterPage } from "./pages/login-register-page";
 import { UserPage } from "./pages/user-page";
@@ -13,7 +10,7 @@ import { AdminPage } from "./pages/admin-page";
 import { AdminUserInfo } from "./pages/admin-user-info";
 
 function App() {
-
+  //ROUTING FOR PAGES
   return (
     <div className="App">
       <Router>
