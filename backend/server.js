@@ -16,7 +16,7 @@ app.use(function(req, res, next) {
   next()
 });
 
-//ADDITIONAL API ROUTE
+//USE OF API ROUTES TO MAKE REQUESTS
 app.use('/api/v1/', router)
 
 const start = async () => {

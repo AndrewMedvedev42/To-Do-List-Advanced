@@ -112,7 +112,7 @@ const RegisterSection = () => {
                         axios
                             .post(`${process.env.REACT_APP_SERVER_URL}/api/v1/login_register`, bodyData)
                             .then(res => {
-                                alert("Account successfully registered. Please procced to the Login section");
+                                alert("Account successfully registered. Please proceed to the Login section");
                             })
                             .catch(err => {
                                 alert("Please, type your details correctly")
