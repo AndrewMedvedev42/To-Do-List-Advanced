@@ -21,7 +21,7 @@ app.use('/api/v1/', router)
 
 const start = async () => {
     try {
-        //CONNECTION TO DATA BASE
+        //CONNECTION TO MONGODB DATA BASE
         await connectDB(process.env.CLUSTER_URI)
         app.listen(port, console.log(`Listening port ${port}`))
     } catch (error) {
