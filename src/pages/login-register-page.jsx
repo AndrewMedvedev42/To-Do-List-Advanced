@@ -2,6 +2,8 @@ import axios from 'axios';
 import {useState, useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 
+import { mailValidation, passwordValidation } from "../constants";
+
 //BASE COMPONENT OF THE PAGE
 export const LoginRegisterPage = () => {
     return (
@@ -16,19 +18,15 @@ export const LoginRegisterPage = () => {
 
 //LOGIN FROM COMPONENT
 const LoginSection = () => {
-            //COMPONENT'S STATE
     const [userLoginEmail, setUserLoginEmail] = useState("")
     const [userLoginPassword, setUserLoginPassword] = useState("")
-      //SETS ROLE TO SESSION STORAGE TO LIMIT ACCESS
+
     useEffect(()=>{
         window.sessionStorage.setItem("M0NTY3ODkw", JSON.stringify({role:"Customer"}));
       },[])
-        //USE NAVIGATE TO MOVE BETWEEN PAGES
+
     const history = useNavigate();
-        //VAILDATION SYMBOLS TO CHECK IF TYPED EMAIL CAN BE USED AS REAL EMAIL
-    const mailValidation= /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const passwordValidation = /^\S+$/
-        //CHECKS EXISTING ACCOUNT FOR ACCESS
+
     const userCheckProcces = (data) => {
         const {password, activeAccount, _id} = data.data.user
             if (userLoginPassword === password) {
@@ -42,7 +40,7 @@ const LoginSection = () => {
                 alert("Wrong password, please try again.")
             }
     }
-        //FINDS USER INFO FOR FURTHER VALIDATION
+
     const getUserDataByLogin = (e) => {
         e.preventDefault();
         if (userLoginEmail.match(mailValidation)) {
@@ -75,15 +73,11 @@ const LoginSection = () => {
 
 //COMPONENT FOR REGISTER OF USER 
 const RegisterSection = () => {
-        //COMPONENT'S STATES
     const [userFirstName, setUserFirstName] = useState("")
     const [userLastName, setUserLastName] = useState("")
     const [userEmail, setUserEmail] = useState("")
     const [userPassword, setUserPassword] = useState("")
-        //VAILDATION SYMBOLS TO CHECK IF TYPED EMAIL OR PASSWORD CAN BE USED AS REAL EMAIL AND PASSWORD
-        const emailValidation = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        const passwordValidation = /^\S+$/
-        //PROCESS OF DEPLOYING REGISTER INFO INTO DATABASE
+
     const startRegisterProcess = (e) => {
         e.preventDefault();
         const ifEmptyUserData = (i, content_type) => {
@@ -109,6 +103,7 @@ const RegisterSection = () => {
                             toDoList:[]
                         }
                         //POSTS NEW USER INFO INTO DATABASE
+                        console.log(bodyData);
                         axios
                             .post(`${process.env.REACT_APP_SERVER_URL}/api/v1/login_register`, bodyData)
                             .then(res => {

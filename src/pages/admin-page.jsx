@@ -4,29 +4,26 @@ import { FaUserAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 export const AdminPage = () => {
-    //COMPONENT'S STATE
-        const [userRole, setUserRole] = useState({role:"Not an Admin"})
-        const [counter, setCounter] = useState(0)
-        const [userList, setUserList] = useState([])
-        const iconSize = 64
+    const [userRole, setUserRole] = useState({role:"Not an Admin"})
+    const [counter, setCounter] = useState(0)
+    const [userList, setUserList] = useState([])
+    const iconSize = 64
 
-        //GETS USER ROLE DATA FORM SESSION STORAGE FOR VALIDATION
-        useEffect(()=>{
-            try {
-                const roleInfo = JSON.parse(window.sessionStorage.getItem("M0NTY3ODkw"))
-                if (roleInfo) {
-                    setUserRole(roleInfo)
-                }
-            } catch (error) {
-                console.log(error);
+    useEffect(()=>{
+        try {
+            const roleInfo = JSON.parse(window.sessionStorage.getItem("M0NTY3ODkw"))
+            if (roleInfo) {
+                setUserRole(roleInfo)
             }
-        },[])
+        } catch (error) {
+            console.log(error);
+        }
+    },[])
 
-        //REQUESTS LIST OF ALL USERS
-        useEffect(()=>{
-            axios.get(`${process.env.REACT_APP_SERVER_URL}/api/v1/admin`)
-            .then(res => setUserList(res.data.users)).catch(err=>console.log(err));
-        },[counter])
+    useEffect(()=>{
+        axios.get(`${process.env.REACT_APP_SERVER_URL}/api/v1/admin`)
+        .then(res => setUserList(res.data.users)).catch(err=>console.log(err));
+    },[counter])
 
         //REQUESTS TO DELETE AN ACCOUNT
         const deleteUserAccount = (user_id) => {
