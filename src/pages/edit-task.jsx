@@ -79,7 +79,7 @@ export const EditTaskPage = () => {
                                 <>
                                     <form onSubmit={updateNote} className="edit-task-form" action="">
                                         <label htmlFor="">Change task title: </label>
-                                        <input maxLength="40" onChange={()=>{setDisabledButton(false)}} type="text" placeholder="Title" defaultValue={taskData.title}/>
+                                        <input maxLength={40} onChange={()=>{setDisabledButton(false)}} type="text" placeholder="Title" defaultValue={taskData.title}/>
                                         <label htmlFor="">Change task description: </label>
                                         <textarea onChange={()=>{setDisabledButton(false)}} defaultValue={taskData.description} rows="5"></textarea>
                                         <label>Done: <input onChange={()=>{setDisabledButton(false)}} type="checkbox" defaultChecked={taskData.completed}/></label>

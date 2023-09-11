@@ -69,9 +69,9 @@ export const EditUserDetails = () => {
                         <section className="white-container">
                             <form className="form" onSubmit={(e)=>{updateUserInfo(e, userData._id)}}>
                                 <label htmlFor="">First name: </label>
-                                <input maxLength="40" onChange={()=>{setDisabledButton(false)}} placeholder="First name" defaultValue={userData.firstName}/>
+                                <input maxLength={40} onChange={()=>{setDisabledButton(false)}} placeholder="First name" defaultValue={userData.firstName}/>
                                 <label htmlFor="">Last name: </label>
-                                <input maxLength="40" onChange={()=>{setDisabledButton(false)}} placeholder="Last name" defaultValue={userData.lastName}/>
+                                <input maxLength={40} onChange={()=>{setDisabledButton(false)}} placeholder="Last name" defaultValue={userData.lastName}/>
                                 <button className={ disabledButton ? "disabled-button" : "submit-button"} disabled={disabledButton}>Update</button>
                             </form>
                             <button className="delete-button" onClick={()=>{(deleteUserAccount(userData._id))}}>Delete account</button>

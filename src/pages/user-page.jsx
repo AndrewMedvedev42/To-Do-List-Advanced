@@ -7,14 +7,15 @@ import { ifEmptyTaskFileds } from "../functions";
 
 //USER PAGE
 export const UserPage = () => {
-        //COMPONENT'S STATES
     const [count, setCount] = useState(0)
     const [userData, setUserData] = useState(null)
     const [userTaskList, setUserTaskList] = useState([])
     const [userRole, setUserRole] = useState({role:"Not a customer", userID:"---"})
     const pathID = useLocation().pathname.split('/')[2]
     const iconSize = 64
-        //GETS USER ROLE DATA FORM SESSION STORAGE FOR VALIDATION
+
+
+
     useEffect(()=>{
         try {
             const roleInfo = JSON.parse(window.sessionStorage.getItem("M0NTY3ODkw"))
@@ -26,25 +27,23 @@ export const UserPage = () => {
         }
     },[])
 
-        //DISTRIBUTE USER DATA AND LIST SEPARATELY TO MANIPULATE LIST EASIER
     const distributeData = (res) => {
         const {user} = res.data
         setUserData(user)
         setUserTaskList(user.toDoList)
     }
-        //GET USER INFO FROM DATABASE
+
     useEffect(()=>{
         axios.get(`${process.env.REACT_APP_SERVER_URL}/api/v1/users/${pathID}`)
             .then(res=>distributeData(res))
             .catch(err=> alert("Sorry, account was not found."));
     },[count, pathID])
 
-        //REMOVE TASK FROM userTaskList STATE
     const removeTaskFromList = (i) => {
         let rostedTaskList = userTaskList.filter((item) => item._id !== i)
         setUserTaskList(rostedTaskList);
     }
-        //SUBMIT TASK TO THE USER ACCOUNT DATABASE
+
     const submitTask = (e, item_id) => {
         e.preventDefault();
 
@@ -54,12 +53,12 @@ export const UserPage = () => {
         }
             //IF POST IS SUCCESSFUL, ALSO TRIGGERS count STATE RE-REQUEST DATA OF USER
         axios.post(`${process.env.REACT_APP_SERVER_URL}/api/v1/task/${item_id}`, taskInfo)
-        .then(res => setCount(count+1)).catch(err=>alert.log("Not able to send a task"));
+        .then(res => setCount(count+1)).catch(err=>alert("Not able to send a task"));
     }
             //DELETES TASK FROM DATABASE AND REMOVES TASK FROM userTaskList
     const deleteTask = (user_id, task_id) => {
         axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/v1/task/${user_id}?taskID=${task_id}`)
-        .then(res => removeTaskFromList(task_id)).catch(err=>alert.log("Not able to delete a task"));
+        .then(res => removeTaskFromList(task_id)).catch(err=>alert("Not able to delete a task"));
     }
             //JSX CODE
     return (
@@ -82,15 +81,15 @@ export const UserPage = () => {
                             <section className="create-task-section">
                                 <form onSubmit={(e)=>{(submitTask(e, userData._id))}} className="white-container form" action="">
                                     <h2>Create task</h2>
-                                    <input maxLength="40" placeholder="Title" />
-                                    <textarea placeholder="Description" name="" id="" cols="30" rows="10"></textarea>
+                                    <input maxLength={40} placeholder="Title" />
+                                    <textarea placeholder="Description" name="" id="" cols={30} rows={10}></textarea>
                                     <button className="submit-button">Create</button>
                                 </form>
                             <section className="task-list">
                                 {
                                     //RENDERS THE TASK LIST IF LIST NOT EMPTY
                                     userTaskList.length ? (
-                                        userTaskList.map(item=>{
+                                        userTaskList.map((item)=>{
                                             return (
                                                 <article key={item._id} className="white-container">
                                                     <h2 className={`title ${item.completed ? "crossed":""}`}>{item.title}</h2>

@@ -2,9 +2,8 @@ import axios from 'axios';
 import {useState, useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 
-import { mailValidation, passwordValidation } from "../constants";
+import { emailValidation, passwordValidation } from "../constants";
 
-//BASE COMPONENT OF THE PAGE
 export const LoginRegisterPage = () => {
     return (
         <section className="login-register-page">
@@ -16,7 +15,6 @@ export const LoginRegisterPage = () => {
         </section>)
 }
 
-//LOGIN FROM COMPONENT
 const LoginSection = () => {
     const [userLoginEmail, setUserLoginEmail] = useState("")
     const [userLoginPassword, setUserLoginPassword] = useState("")
@@ -43,7 +41,7 @@ const LoginSection = () => {
 
     const getUserDataByLogin = (e) => {
         e.preventDefault();
-        if (userLoginEmail.match(mailValidation)) {
+        if (userLoginEmail.match(emailValidation)) {
             if (userLoginPassword.match(passwordValidation)) {
                 axios
                     .get(`${process.env.REACT_APP_SERVER_URL}/api/v1/login_register?email=${userLoginEmail}`)
@@ -71,7 +69,6 @@ const LoginSection = () => {
     )
 }
 
-//COMPONENT FOR REGISTER OF USER 
 const RegisterSection = () => {
     const [userFirstName, setUserFirstName] = useState("")
     const [userLastName, setUserLastName] = useState("")
@@ -80,7 +77,7 @@ const RegisterSection = () => {
 
     const startRegisterProcess = (e) => {
         e.preventDefault();
-        const ifEmptyUserData = (i, content_type) => {
+        const ifEmptyUserData = (i) => {
                 if (!Boolean(i) && !isNaN(i)) {
                     return "--"
                 }else{
@@ -120,28 +117,26 @@ const RegisterSection = () => {
             alert("Email is typed incorrectly, please try again.")
         }
     } 
-        //COMPONET'S JSX
+
     return (
         <form onSubmit={startRegisterProcess} className="white-container form">
             <h1>Register an account</h1>
-                <input maxLength="40" placeholder="First name" onChange={(e)=>{setUserFirstName(e.target.value)}} required/>
-                <input maxLength="40" placeholder="Last name" onChange={(e)=>{setUserLastName(e.target.value)}} required/>
-                <input maxLength="20" placeholder="Email" type="emailitem_id" onChange={(e)=>{setUserEmail(e.target.value)}} required/>
-                <input maxLength="20" placeholder="Password" onChange={(e)=>{setUserPassword(e.target.value)}} required/>
+                <input maxLength={40} placeholder="First name" onChange={(e)=>{setUserFirstName(e.target.value)}} required/>
+                <input maxLength={40} placeholder="Last name" onChange={(e)=>{setUserLastName(e.target.value)}} required/>
+                <input maxLength={20} placeholder="Email" type="emailitem_id" onChange={(e)=>{setUserEmail(e.target.value)}} required/>
+                <input maxLength={20} placeholder="Password" onChange={(e)=>{setUserPassword(e.target.value)}} required/>
             <button className="submit-button">Register</button>
         </form>
     )
 }
 
-//LOGIN  COMPONENT FOR ADMIN
 const AdminLogin = () => {
-        //COMPONENT'S STATES
     const [adminEmail, setAdminEmail] = useState(null)
     const [adminPassword, setAdminPassword] = useState(null)
     const [adminToken, setAdminToken] = useState(null)
-        //USE NAVIGATE TO MOVE BETWEEN PAGES
+
     const history = useNavigate();
-        //PROCESS TO CHECK FOR CORRECT ADMIN CREDENTIALS
+
     const AdminPass = (e) => {
         e.preventDefault();
             if (adminEmail === process.env.REACT_APP_ADMIN_EMAIL){
@@ -159,7 +154,7 @@ const AdminLogin = () => {
                 alert("Incorrect email, please try again.");
             }
     }
-        //COMPONENT'S JSX
+
     return (
         <form onSubmit={AdminPass} className="white-container form">
             <h1>Log in as Admin</h1>
